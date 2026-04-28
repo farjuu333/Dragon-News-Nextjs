@@ -1,27 +1,8 @@
-import LeftSidebar from "@/components/homepage/news/LeftSidebar";
-import RightSidebar from "@/components/homepage/news/RightSidebar";
+import { redirect } from "next/navigation";
 
-async function getCategories (){
-  const res = await fetch ("https://openapi.programming-hero.com/api/news/categories");
-  const data = await res.json();
-  return data.data;
-}
+const default_category_id ="01";
+ const Home = async()=> {
+  redirect(`/category/${default_category_id}`)
+};
 
-export default async function Home() {
-  const categories = await getCategories();
-  console.log(categories.news_category,"categories");
-  return (
-    
-    <div className=" container mx-auto grid grid-cols-12 gap-4 my-[60px]">
-      <div className="  col-span-3">
-        <LeftSidebar categories={categories} activeId={null}></LeftSidebar>
-      </div>
-      <div className="font-bold text-3xl bg-purple-100 col-span-6">
-        All News
-      </div>
-      <div className=" col-span-3">
-        <RightSidebar></RightSidebar>
-      </div>
-    </div>
-  );
-}
+export default Home;
